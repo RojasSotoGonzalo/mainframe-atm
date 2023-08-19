@@ -70,3 +70,6 @@ mvn clean install
 ```
 mvn exec:java -Dexec.mainClass="bo.edu.ucb.sis213.App"
 ```
+## maqueta de proyecto
+
+https://balsamiq.cloud/so2k7bc/pyq07vw/r2278

@@ -16,6 +16,7 @@ public class App {
           //Verifica la conexion
           if(connection != null) { 
             LoginForm loginForm = new LoginForm(connection);
+            loginForm.setVisible(true);
           }else{
             JOptionPane.showMessageDialog(null,"No se pudo establecer la Conexion",null, JOptionPane.ERROR_MESSAGE, null);
           }

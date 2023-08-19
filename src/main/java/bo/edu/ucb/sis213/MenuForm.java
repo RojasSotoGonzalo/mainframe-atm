@@ -96,6 +96,8 @@ public class MenuForm extends JFrame{
                 break;
             case 3:
                 // Crea y muestra la ventana
+                CambiarPINForm ab=new CambiarPINForm(connection,usuario);
+                ab.setVisible(true);
                 break;    
             default:
                 break;
