@@ -6,24 +6,31 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class funciones {
+import javax.swing.*;
+import java.awt.*;
+public class funciones extends JFrame{
     private static Scanner scanner1=new Scanner(System.in);
+    private static Scanner scanner2=new Scanner(System.in);
     public static Usuario validarPIN(Connection connection, int intentosRestantes) throws SQLException {
         if (intentosRestantes == 0) {
             return null; // No quedan intentos, devuelve null
         }
         System.out.print("Introduce tu PIN: ");
         int pinIngresado = scanner1.nextInt();
-        String query = "SELECT * FROM usuarios WHERE pin = ?";
+        System.out.print("Introduce el Usuario: ");
+        String usario = scanner2.next();
+        String query = "SELECT * FROM usuarios WHERE alias = ? AND pin = ? ";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setInt(1, pinIngresado);
+        preparedStatement.setString(1, usario);
+        preparedStatement.setInt(2, pinIngresado);
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
             int id = resultSet.getInt("id");
             String nombre = resultSet.getString("nombre");
             int pinDB = resultSet.getInt("pin");
             double saldo = resultSet.getDouble("saldo");
-            Usuario usuario = new Usuario(id, nombre, pinDB, saldo);
+            String alias = resultSet.getString("alias");
+            Usuario usuario = new Usuario(id, nombre, pinDB, saldo,alias);
             resultSet.close();
             preparedStatement.close();
             return usuario;
