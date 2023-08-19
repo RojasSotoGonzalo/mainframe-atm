@@ -12,22 +12,32 @@ public class DepositoForm extends JFrame{
     private JTextField depositoField;
     public DepositoForm(Connection connection, Usuario usuario) {
         setTitle("ATM - Realizar Depósito");
-        setSize(400, 200);
+        setSize(700, 300);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(3, 1));
+        panel.setLayout(new GridLayout(7, 2,10,10));
+        JLabel titleLabel = new JLabel("DEPOSITO");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 20)); // Tamaño de fuente y estilo
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        panel.add(titleLabel);
 
         JLabel saldoLabel = new JLabel("Su saldo actual es de: " + usuario.getSaldo() + " Bs");
+        saldoLabel.setFont(new Font("Arial", Font.BOLD,15));
         panel.add(saldoLabel);
 
         JLabel depositoLabel = new JLabel("Cuánto desea depositar: ");
+        depositoLabel.setFont(new Font("Arial", Font.BOLD,15));
         panel.add(depositoLabel);
 
         depositoField = new JTextField();
         panel.add(depositoField);
 
         JButton depositarButton = new JButton("Realizar Depósito");
+        depositarButton.setMargin(new Insets(20, 20, 20, 20)); // Margen de 10 píxeles
+        JButton exitButton = new JButton("Cancelar");
+        exitButton.setMargin(new Insets(20, 20, 20, 20)); // Margen de 10 píxeles
+        
         depositarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -35,7 +45,14 @@ public class DepositoForm extends JFrame{
             }
         });
         panel.add(depositarButton);
-
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                abrirMenu(connection, usuario);
+            }
+            
+        });
+        panel.add(exitButton);
         add(panel);
         setVisible(true);
     }

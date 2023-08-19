@@ -16,19 +16,28 @@ public class LoginForm extends JFrame{
 
     public LoginForm(Connection connection) throws SQLException{
         setTitle("ATM");
-        setSize(500, 250);
+        setSize(700, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(5, 6));
+        panel.setLayout(new GridLayout(7, 2, 10, 10)); 
+        JLabel titleLabel = new JLabel("BIENVENIDO ATM");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24)); // Tamaño de fuente y estilo
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        panel.add(titleLabel);
 
         JLabel aliasLabel = new JLabel("Alias:");
+        aliasLabel.setFont(new Font("Arial", Font.BOLD,20)); // Tamaño
         aliasField = new JTextField();
+                
         JLabel pinLabel = new JLabel("PIN:");
+        pinLabel.setFont(new Font("Arial", Font.BOLD,20));
         pinField = new JPasswordField();
-
+        
         JButton loginButton = new JButton("Login");
+        loginButton.setMargin(new Insets(20, 20, 20, 20)); // Margen de 10 píxeles
         JButton exitButton = new JButton("Exit");
+        exitButton.setMargin(new Insets(20, 20, 20, 20)); // Margen de 10 píxeles
 
         loginButton.addActionListener(new ActionListener() {
             @Override

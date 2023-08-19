@@ -3,6 +3,8 @@ package bo.edu.ucb.sis213;
 import java.sql.Connection;
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,7 +12,7 @@ public class MenuForm extends JFrame{
      public MenuForm(Connection connection, Usuario usuario) {
 
         setTitle("ATM");
-        setSize(400, 300);
+        setSize(700, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel panel = new JPanel();
@@ -20,7 +22,7 @@ public class MenuForm extends JFrame{
         panel.add(nameLabel, BorderLayout.NORTH);
 
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(2, 2));
+        buttonPanel.setLayout(new GridLayout(2, 2, 20, 20));
 
         JButton saldoButton = new JButton("Consultar Saldo");
         JButton depositoButton = new JButton("Realizar Depósito");
@@ -58,6 +60,12 @@ public class MenuForm extends JFrame{
             }
         });
 
+        // Agregar un borde vacío para separar los botones
+        saldoButton.setBorder(new EmptyBorder(20, 20, 20, 20));
+        depositoButton.setBorder(new EmptyBorder(20, 20, 20, 20));
+        retiroButton.setBorder(new EmptyBorder(20, 20, 20, 20));
+        pinButton.setBorder(new EmptyBorder(20, 20, 20, 20));
+
         buttonPanel.add(saldoButton);
         buttonPanel.add(depositoButton);
         buttonPanel.add(retiroButton);
@@ -75,6 +83,7 @@ public class MenuForm extends JFrame{
             }
         });
 
+        exitButton.setBorder(new EmptyBorder(20, 0, 20, 0));
         panel.add(exitButton, BorderLayout.SOUTH);
 
         add(panel);

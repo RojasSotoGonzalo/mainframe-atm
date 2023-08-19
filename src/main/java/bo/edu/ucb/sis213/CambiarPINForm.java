@@ -14,31 +14,43 @@ public class CambiarPINForm extends JFrame{
     private JPasswordField confirmarPINField;
     public CambiarPINForm(Connection connection, Usuario usuario) {
         setTitle("ATM - Cambiar PIN");
-        setSize(400, 250);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setSize(700, 300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(5, 1));
+        panel.setLayout(new GridLayout(7, 2,10,10));
+        JLabel titleLabel = new JLabel("Cambiar PIN");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 20)); // Tamaño de fuente y estilo
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        panel.add(titleLabel);
 
         JLabel pinActualLabel = new JLabel("Ingrese el PIN actual:");
+        pinActualLabel.setFont(new Font("Arial", Font.BOLD,15));
         panel.add(pinActualLabel);
 
         pinActualField = new JPasswordField();
         panel.add(pinActualField);
 
         JLabel nuevoPINLabel = new JLabel("Ingrese el nuevo PIN:");
+        nuevoPINLabel.setFont(new Font("Arial", Font.BOLD,15));
         panel.add(nuevoPINLabel);
 
         nuevoPINField = new JPasswordField();
         panel.add(nuevoPINField);
 
         JLabel confirmarPINLabel = new JLabel("Vuelva a ingresar el nuevo PIN:");
+        confirmarPINLabel.setFont(new Font("Arial", Font.BOLD,15));
         panel.add(confirmarPINLabel);
 
         confirmarPINField = new JPasswordField();
         panel.add(confirmarPINField);
 
         JButton cambiarPINButton = new JButton("Cambiar PIN");
+        cambiarPINButton.setMargin(new Insets(20, 20, 20, 20));
+        
+        JButton exitButton = new JButton("Cancelar");
+        exitButton.setMargin(new Insets(20, 20, 20, 20)); // Margen de 10 píxeles
+        
         cambiarPINButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -47,6 +59,14 @@ public class CambiarPINForm extends JFrame{
         });
         panel.add(cambiarPINButton);
 
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                abrirMenu(connection, usuario);
+            }
+            
+        });
+        panel.add(exitButton);
         add(panel);
         setVisible(true);
     }
@@ -99,4 +119,10 @@ public class CambiarPINForm extends JFrame{
             e.printStackTrace();
           } 
     }
+    private void abrirMenu(Connection connection, Usuario usuario) {
+        dispose(); // Cierra la ventana actual
+        // Crea y muestra la ventana 
+        MenuForm menuPrincipalForm = new MenuForm(connection, usuario);
+        menuPrincipalForm.setVisible(true);
+    } 
 }
