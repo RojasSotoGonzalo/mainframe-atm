@@ -1,16 +1,16 @@
-package bo.edu.ucb.sis213;
+package bo.edu.ucb.sis213.view;
 
-import java.sql.Connection;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import bo.edu.ucb.sis213.bl.User;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MenuForm extends JFrame{
-     public MenuForm(Connection connection, Usuario usuario) {
-
+public class MenuForm extends JFrame {
+    public MenuForm(User usuario) {
         setTitle("ATM");
         setSize(700, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -19,16 +19,20 @@ public class MenuForm extends JFrame{
         panel.setLayout(new BorderLayout());
 
         JLabel nameLabel = new JLabel("Nombre: " + usuario.getNombre());
+        nameLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        nameLabel.setBorder(new EmptyBorder(20, 0, 0, 0)); // Añadir espacio superior
         panel.add(nameLabel, BorderLayout.NORTH);
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(2, 2, 20, 20));
-
+         
         JButton saldoButton = new JButton("Consultar Saldo");
         JButton depositoButton = new JButton("Realizar Depósito");
         JButton retiroButton = new JButton("Realizar Retiro");
         JButton pinButton = new JButton("Cambiar PIN");
-
+        JButton exitButton = new JButton("Salir");
+        exitButton.setBorder(new EmptyBorder(20, 20, 20, 20));
+        // Código de ActionListener para cada botón (sin cambios)
         saldoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -40,7 +44,9 @@ public class MenuForm extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Lógica para realizar un depósito
-                abrir(connection, usuario,1);
+                DepositoForm asc=new DepositoForm(usuario);
+                dispose();
+                asc.setVisible(true);
             }
         });
 
@@ -48,7 +54,9 @@ public class MenuForm extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Lógica para realizar un retiro
-                abrir(connection, usuario,2);
+                RetiroForm asd=new RetiroForm(usuario);
+                dispose();
+                asd.setVisible(true);
             }
         });
 
@@ -56,10 +64,20 @@ public class MenuForm extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Lógica para cambiar el PIN
-                abrir(connection, usuario,3);
+                CambiarPINForm ab=new CambiarPINForm(usuario);
+                dispose();
+                ab.setVisible(true);
             }
         });
 
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Gracias por usar el cajero. ¡Hasta luego!");
+                dispose();
+                System.exit(0);
+            }
+        });
         // Agregar un borde vacío para separar los botones
         saldoButton.setBorder(new EmptyBorder(20, 20, 20, 20));
         depositoButton.setBorder(new EmptyBorder(20, 20, 20, 20));
@@ -72,45 +90,11 @@ public class MenuForm extends JFrame{
         buttonPanel.add(pinButton);
 
         panel.add(buttonPanel, BorderLayout.CENTER);
-
-        JButton exitButton = new JButton("Salir");
-        exitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Gracias por usar el cajero. ¡Hasta luego!");
-                dispose();
-                System.exit(0);
-            }
-        });
-
-        exitButton.setBorder(new EmptyBorder(20, 0, 20, 0));
+         // Ajustar el margen del botón Salir
         panel.add(exitButton, BorderLayout.SOUTH);
 
         add(panel);
+        setLocationRelativeTo(null);
         setVisible(true);
-    
     }
-    private void abrir(Connection connection, Usuario usuario,int i){
-        dispose(); // Cierra la ventana actual
-        switch (i) {
-            case 1:
-                // Crea y muestra la ventana
-                DepositoForm asc=new DepositoForm(connection,usuario);
-                asc.setVisible(true); 
-                break;
-            case 2:
-                // Crea y muestra la ventana 
-                RetiroForm asd=new RetiroForm(connection,usuario);
-                asd.setVisible(true);
-                break;
-            case 3:
-                // Crea y muestra la ventana
-                CambiarPINForm ab=new CambiarPINForm(connection,usuario);
-                ab.setVisible(true);
-                break;    
-            default:
-                break;
-        }
-    }
-
 }

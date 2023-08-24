@@ -1,14 +1,17 @@
-package bo.edu.ucb.sis213;
+package bo.edu.ucb.sis213.bl;
 
-public class Usuario {
+import java.math.BigDecimal;
+
+public class User {
     private int id;
     private String nombre;
     private int pin;
-    private double saldo;
+    private BigDecimal saldo;
     private String  alias;
-    public Usuario() {
+    public User() {
     }
-    public Usuario(int id, String nombre, int pin, double saldo, String alias) {
+    //usurario basico con get set y funcion deacuerdo POO
+    public User(int id, String nombre, int pin, BigDecimal saldo, String alias) {
         this.id = id;
         this.nombre = nombre;
         this.pin = pin;
@@ -33,10 +36,10 @@ public class Usuario {
     public void setPin(int pin) {
         this.pin = pin;
     }
-    public double getSaldo() {
+    public BigDecimal getSaldo() {
         return saldo;
     }
-    public void setSaldo(double saldo) {
+    public void setSaldo(BigDecimal saldo) {
         this.saldo = saldo;
     }
     public String getAlias() {
