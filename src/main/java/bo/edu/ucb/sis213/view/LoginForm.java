@@ -77,6 +77,7 @@ public class LoginForm extends JFrame{
         add(panel);
         setVisible(true);
     }
+    //funcion encargada de abrir menu
     private void abrirMenu( User usuario) {
         dispose(); // Cierra la ventana actual de LoginForm
         // Crea y muestra la ventana del menú principal

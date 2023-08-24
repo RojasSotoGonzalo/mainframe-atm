@@ -70,7 +70,7 @@ public class RetiroForm extends JFrame{
         add(panel);
         setVisible(true);
     }
-    
+    //funcion encargada de abrir menu
     private void abrirMenu(User usuario) {
         dispose(); // Cierra la ventana actual
         // Crea y muestra la ventana 

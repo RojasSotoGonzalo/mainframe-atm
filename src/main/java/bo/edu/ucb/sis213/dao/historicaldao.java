@@ -14,6 +14,7 @@ public class historicaldao {
         Connection connection = Conexion.obtenerConexion(); // Asegúrate de que Conexion.obtenerConexion() funcione correctamente
         
         if (connection != null) {
+            //CODIGO ENCARGADO DE ACTUALIZAR HISTORICO
             String insertHistoricoQuery = "INSERT INTO historico (usuario_id, tipo_operacion, cantidad) VALUES (?, ?, ?)";
             PreparedStatement insertHistoricoStatement = connection.prepareStatement(insertHistoricoQuery);
             insertHistoricoStatement.setInt(1, userId);

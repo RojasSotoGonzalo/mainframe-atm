@@ -73,7 +73,7 @@ public class MenuForm extends JFrame {
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Gracias por usar el cajero. ¡Hasta luego!");
+                JOptionPane.showMessageDialog(null,"Gracias por usar el cajero. ¡Hasta luego!", "Finalizaci\u00F3n", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
                 System.exit(0);
             }
